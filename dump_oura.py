@@ -6,16 +6,10 @@ import os
 import json
 import time
 from oura import OuraClient
+from etlutils.date import mkdate
 
 DUMP_DIR = 'oura-dumps'
 CONFIG_FILE = 'config.ini'
-
-def mkdate(datestr):
-    try:
-        fulltime = time.strptime(datestr, '%Y-%m-%d')
-        return datetime.date(fulltime.tm_year, fulltime.tm_mon, fulltime.tm_mday)
-    except ValueError:
-        raise argparse.ArgumentTypeError(datestr + ' is not a proper date string')
 
 
 def logmsg(msg):
