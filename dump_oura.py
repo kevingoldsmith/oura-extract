@@ -38,13 +38,14 @@ def previously_dumped(date):
 
 
 def dump_day(c, date):
-    sleep_data = c.sleep_summary(date)
+    date_str = date.isoformat()
+    sleep_data = c.sleep_summary(date_str)
     dump_to_json_file("sleep", date, sleep_data)
 
-    activity_data = c.activity_summary(date)
+    activity_data = c.activity_summary(date_str)
     dump_to_json_file("activity", date, activity_data)
 
-    readiness_data = c.readiness_summary(date)
+    readiness_data = c.readiness_summary(date_str)
     dump_to_json_file("readiness", date, readiness_data)
 
     return True
@@ -52,18 +53,10 @@ def dump_day(c, date):
 
 config_parser = configparser.ConfigParser()
 config_parser.read(CONFIG_FILE)
-client_id = config_parser.get('Login Parameters', 'client_id')
-client_secret = config_parser.get('Login Parameters', 'client_secret')
-access_token = config_parser.get('Login Parameters', 'access_token')
-refresh_token = config_parser.get('Login Parameters', 'refresh_token')
-refresh_callback = lambda x: update_config(x)
+personal_access_token = config_parser.get('Login Parameters', 'personal_access_token')
 
 auth_client = OuraClient(
-    client_id=client_id,
-    client_secret=client_secret,
-    access_token=access_token,
-    refresh_token=refresh_token,
-    refresh_callback=refresh_callback
+        personal_access_token=personal_access_token
     )
 
 date = datetime.date.today()
