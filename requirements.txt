@@ -4,7 +4,7 @@ etlutils==0.2
 foursquare==1!2020.1.30
 geographiclib==1.50
 geopy==1.22.0
-idna==2.9
+idna==3.7
 pillow>=12.1.1
 prettytable==0.7.2
 progress==1.5
